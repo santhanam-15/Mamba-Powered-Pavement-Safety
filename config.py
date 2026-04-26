@@ -1,0 +1,6 @@
+IMG_SIZE = 256
+BATCH_SIZE = 4
+DATASET_PATH = "Dataset/Cracks-and-Potholes-in-Road-Images/v1"
+STAGE1_OUTPUT_PATH = "Dataset/Stage1_Corrected"
+DEFAULT_CAMERA_HEIGHT_MM = 680.0
+DEFAULT_CAMERA_ANGLE_DEG = 35.0
