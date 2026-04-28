@@ -1,0 +1,29 @@
+THRESHOLD TUNING RECOMMENDATIONS
+================================================================================
+
+SCENARIO 1: Balanced Performance (Recommended for most use cases)
+  Threshold: 0.40
+  F1 Score: 0.1929
+  Precision: 0.1254 (Avoid false positives)
+  Recall: 0.4178 (Catch actual defects)
+
+SCENARIO 2: High Recall (Maximize defect detection, accept more false positives)
+  Threshold: 0.10
+  Recall: 0.6270
+  Precision: 0.1050
+  F1 Score: 0.1799
+  Use case: Road inspection - don't miss any defects
+
+SCENARIO 3: High Precision (Minimize false positives, accept missed defects)
+  Threshold: 0.90
+  Precision: 0.1586
+  Recall: 0.0510
+  F1 Score: 0.0772
+  Use case: Automated maintenance scheduling - only fix real defects
+
+SCENARIO 4: Maximum IoU (Best segmentation accuracy)
+  Threshold: 0.40
+  IoU: 0.1068
+  Precision: 0.1254
+  Recall: 0.4178
+

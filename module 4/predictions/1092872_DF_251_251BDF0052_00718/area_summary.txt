@@ -1,0 +1,4 @@
+white_pixels=2265
+r=0.00015625
+area_mm2=0.3539
+area_cm2=0.0035

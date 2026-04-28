@@ -1,0 +1,104 @@
+You're right, I created too many files! Let me give you **ONE clear entry point** 🎯
+
+---
+
+## 🚀 SINGLE ENTRY POINT - START HERE
+
+### **Just run this ONE command:**
+
+```bash
+cd "d:\I FILES\Studies\sem6\MINI\module 4"
+python train.py
+```
+
+**That's it! This is your entry point.** ✅
+
+---
+
+## 📊 What Happens When You Run It
+
+1. ✅ Automatically uses the **improved class weighting** (pos_weight=30)
+2. ✅ Trains your model for 50 epochs
+3. ✅ Saves the best model
+4. ✅ Takes 4-8 hours on GPU
+
+---
+
+## 🔄 After Training Completes
+
+Then run these in order:
+
+**Step 2: Find best threshold**
+```bash
+python tune_threshold.py --v1-path v1 --checkpoint cmsegnet_stage2.pt
+```
+
+**Step 3: Test on all images**
+```bash
+python test_model_enhanced.py --checkpoint cmsegnet_stage2.pt
+```
+
+---
+
+## 📁 ALL FILES YOU CAN IGNORE
+
+You **don't need** to use these directly:
+
+| File | Why You Don't Need It |
+|------|----------------------|
+| `switch_training_config.py` | Already configured in train.py |
+| `compare_results.py` | Optional, only if you want graphs |
+| `quick_start.bat` | Same as running train.py manually |
+| `TRAINING_STRATEGY.md` | Reference only, not needed to run |
+| `README_CLASS_IMBALANCE_FIX.md` | Reference only, not needed to run |
+
+---
+
+## ✅ SIMPLIFIED CHECKLIST
+
+Just do these 3 steps:
+
+- [ ] **Step 1:** `python train.py` (⏱️ 4-8 hours)
+- [ ] **Step 2:** `python tune_threshold.py --v1-path v1 --checkpoint cmsegnet_stage2.pt` (⏱️ 5 min)
+- [ ] **Step 3:** `python test_model_enhanced.py --checkpoint cmsegnet_stage2.pt` (⏱️ 10 min)
+
+**Done!** ✓
+
+---
+
+## 💾 Files Modified vs New
+
+### **Modified (Improved)**
+- train.py ← This is what you need to use
+
+### **New (Supporting Tools, Optional)**
+- `tune_threshold.py` - helps find best threshold
+- `compare_results.py` - makes graphs (optional)
+- `switch_training_config.py` - for changing settings (optional)
+- `quick_start.bat` - convenience script (optional)
+- Documentation files - reference only
+
+---
+
+## 🎯 YOUR PATH FORWARD
+
+```
+1. Open PowerShell/Terminal
+   ↓
+2. cd d:\I FILES\Studies\sem6\MINI\module 4
+   ↓
+3. python train.py
+   (Wait 4-8 hours... ☕)
+   ↓
+4. python tune_threshold.py --v1-path v1 --checkpoint cmsegnet_stage2.pt
+   ↓
+5. python test_model_enhanced.py
+   ↓
+✓ DONE - Model is improved!
+```
+
+---
+
+**That's your complete workflow. Just 3 commands. Simple.** 🚀
+
+Start with: `python train.py`You've used 65% of your session rate limit. Your session rate limit will reset on April 28 at 12:57 AM. [Learn More](https://aka.ms/github-copilot-rate-limit-error)
