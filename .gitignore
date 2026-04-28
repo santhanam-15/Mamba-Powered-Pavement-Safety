@@ -3,3 +3,16 @@ __pycache__/
 venv/
 env/
 module 3/archive.zip
+*.pt
+Dataset/
+*/test_results/
+*/test6*
+*/20*epoch*/
+*/v1/
+*/v2*/
+*/curr*/
+*/all/
+*/perfect*/
+*/.DS_Store
+.ipynb_checkpoints/
+*.egg-info/
