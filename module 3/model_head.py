@@ -162,23 +162,6 @@ class LightweightMLPDecoder(nn.Module):
         return F.interpolate(logits, size=(output_size, output_size), mode="bilinear", align_corners=False)
 
 
-class EdgeDetectionHead(nn.Module):
-    """Lightweight auxiliary boundary head operating on MSAA features."""
-
-    def __init__(self, in_channels: int, hidden_channels: int = 32) -> None:
-        super().__init__()
-        self.block = nn.Sequential(
-            nn.Conv2d(in_channels, hidden_channels, kernel_size=3, padding=1, bias=False),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(hidden_channels, 1, kernel_size=1),
-            nn.Sigmoid(),
-        )
-
-    def forward(self, x: torch.Tensor, output_size: int) -> torch.Tensor:
-        edge_map = self.block(x)
-        return F.interpolate(edge_map, size=(output_size, output_size), mode="bilinear", align_corners=False)
-
-
 class CMEncoder(nn.Module):
     """Shared encoder feeding both the CNN branch and the Mamba branch."""
 
@@ -200,7 +183,7 @@ class CMEncoder(nn.Module):
 class CMSegNet(nn.Module):
     """Stage-2 CMSegNet-style segmentation model."""
 
-    def __init__(self, in_channels: int = 3, out_channels: int = 1, img_size: int = 256) -> None:
+    def __init__(self, in_channels: int = 3, out_channels: int = 3, img_size: int = 256) -> None:
         super().__init__()
         self.img_size = img_size
         self.encoder = CMEncoder(in_channels=in_channels, stem_channels=64, out_channels=128)
@@ -208,13 +191,10 @@ class CMSegNet(nn.Module):
         self.optimized_mamba = OptimizedMambaBlock(128)
         self.msaa = MSAAModule(128)
         self.decoder = LightweightMLPDecoder(in_channels=128, skip_channels=64, out_channels=out_channels)
-        self.edge_head = EdgeDetectionHead(in_channels=128)
 
-    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         encoded, skip_features = self.encoder(x)
         local_features = self.cnn_branch(encoded)
         global_features = self.optimized_mamba(encoded)
         fused = self.msaa(local_features, global_features)
-        segmentation_logits = self.decoder(fused, skip_features, output_size=self.img_size)
-        edge_map = self.edge_head(fused, output_size=self.img_size)
-        return segmentation_logits, edge_map
+        return self.decoder(fused, skip_features, output_size=self.img_size)
