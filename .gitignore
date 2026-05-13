@@ -5,6 +5,5 @@ env/
 module 3/archive.zip
 .ipynb_checkpoints/
 *.egg-info/
-*/v1/
 *.7z
 "*.zip"
